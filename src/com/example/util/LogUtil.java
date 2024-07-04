@@ -11,7 +11,7 @@ public class LogUtil {
 
     public static void log(String level, String message) {
         String timestamp = dateFormat.format(new Date());
-        String logMessage = String.format("[%s] %s: %s", timestamp, level, message);
+        String logMessage = String.format("[%s] %s: %s [%s]", timestamp, level, message, getCallerInfo());
         System.out.println(logMessage);
         writeToFile(logMessage);
     }
@@ -34,5 +34,15 @@ public class LogUtil {
         } catch (IOException e) {
             System.err.println("Failed to write log to file: " + e.getMessage());
         }
+    }
+    
+    private static String getCallerInfo() {
+        StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+        for (StackTraceElement element : stackTrace) {
+            if (!element.getClassName().equals(LogUtil.class.getName()) && !element.getClassName().startsWith("java.lang.Thread")) {
+                return String.format("%s:%d", element.getFileName(), element.getLineNumber());
+            }
+        }
+        return "Unknown Source";
     }
 }
