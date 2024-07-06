@@ -6,7 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LogUtil {
-	private static final String LOG_FILE_PATH = "C:\\Users\\User\\Downloads\\application.log";
+	private static final String LOG_FILE_PATH = "path to save log file";
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
 
     public static void log(String level, String message) {
