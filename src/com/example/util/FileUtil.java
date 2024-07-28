@@ -102,6 +102,16 @@ public class FileUtil {
 			throw new RuntimeException("Error moving file from " + sourceFilePath + " to " + destFolder, ex);
 		}
 	}
+	
+	// 移動文件
+	public void renameFile(String sourceFilePath, String destFolder) {
+		try {
+			Files.move(Paths.get(sourceFilePath), Paths.get(destFolder), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException ex) {
+			throw new RuntimeException("Error rename file from " + sourceFilePath + " to " + destFolder, ex);
+		}
+	}
+
 
 	// 讀取文件
 	public String readFile(String filePath) throws IOException {
